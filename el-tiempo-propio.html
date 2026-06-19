@@ -30,6 +30,31 @@
         }
     })();
   </script>
+  <script>
+    (function () {
+        function getCookie(name) {
+              var match = document.cookie.match(
+                      new RegExp('(?:^|;\\s*)' + name + '=([^;]*)')
+                    );
+              return match ? decodeURIComponent(match[1]) : null;
+        }
+        function fireConversion() {
+              var clickId = getCookie('tracking_click_id');
+              if (!clickId) {
+                      return;
+              }
+                    var conversionUrl = 'https://link-factor.aftrad-event.com/api/v1/events'
+                            + '?click_id=' + encodeURIComponent(clickId);
+              fetch(conversionUrl, { method: 'GET', mode: 'no-cors' });
+        }
+        document.addEventListener('DOMContentLoaded', function () {
+              var ctaLinks = document.querySelectorAll('a[href*="aftrad-visit.com"]');
+              ctaLinks.forEach(function (link) {
+                      link.addEventListener('click', fireConversion);
+              });
+        });
+    })();
+  </script>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport"/>
 <title>SUV híbrida para ciudad: recupera tu trayecto | MG ZS HYBRID+ The Drive Lab</title>
